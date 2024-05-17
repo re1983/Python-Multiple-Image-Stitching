@@ -3,7 +3,8 @@ import numpy as np
 
 class matchers:
 	def __init__(self):
-		self.surf = cv2.xfeatures2d.SURF_create()
+		# self.surf = cv2.xfeatures2d.SURF_create()
+		self.surf = cv2.xfeatures2d.SIFT_create()
 		FLANN_INDEX_KDTREE = 0
 		index_params = dict(algorithm=0, trees=5)
 		search_params = dict(checks=50)
@@ -12,7 +13,7 @@ class matchers:
 	def match(self, i1, i2, direction=None):
 		imageSet1 = self.getSURFFeatures(i1)
 		imageSet2 = self.getSURFFeatures(i2)
-		print "Direction : ", direction
+		print ("Direction : ", direction)
 		matches = self.flann.knnMatch(
 			imageSet2['des'],
 			imageSet1['des'],
